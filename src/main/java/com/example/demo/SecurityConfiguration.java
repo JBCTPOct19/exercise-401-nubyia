@@ -21,8 +21,12 @@ public class SecurityConfiguration extends
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().anyRequest().authenticated()
-                .and().formLogin();
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/js/**").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .and().httpBasic();
+
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
